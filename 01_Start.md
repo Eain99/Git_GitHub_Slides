@@ -14,7 +14,6 @@
   - [GitHubとは…](#githubとは)
   - [リポジトリの設定 - ハンズオン](#リポジトリの設定---ハンズオン)
   - [ローカルでの設定](#ローカルでの設定)
-    - [Gitの設定をする](#gitの設定をする)
     - [ローカルGitリポジトリを作成する](#ローカルgitリポジトリを作成する)
     - [README.md ファイルの追加](#readmemd-ファイルの追加)
     - [Gitのステータスを確認する](#gitのステータスを確認する)
@@ -98,31 +97,13 @@ GitHub の設定
 
 **Mac : Terminalを使用**
 
-**Windows : Ubuntuを使用**
-
-### Gitの設定をする
-  - `git config` コマンドを使用して, Gitのユーザー名とメールを設定します
-  - `GitHub_UserName` と `example@email.com` 以下を自分のものに置き換えてください
-
-```sh
-git config --global user.name "GitHub_UserName"
-git config --global user.email "example@email.com"
-git config --global color.ui auto
-```
-
-設定が有効になったことを確認しましょう
-
-```sh
-git config --global --list
-```
-
-[Git - 最初のGitの構成](https://git-scm.com/book/ja/v2/%E4%BD%BF%E3%81%84%E5%A7%8B%E3%82%81%E3%82%8B-%E6%9C%80%E5%88%9D%E3%81%AEGit%E3%81%AE%E6%A7%8B%E6%88%90)
+**Windows : Linux Terminal（Ubuntu on WSL2）を使用**
 
 ### ローカルGitリポジトリを作成する
 
 アクセスしやすいフォルダーに移動し, `learning_js` という名前のディレクトリを作成します.  
 macOS ユーザーだと Document フォルダをお勧めします.  
-Window ユーザーの場合は, [Ubuntu](00_Prep.md#wslの初期化) のトップ フォルダーからでもいいですよ.  
+Window ユーザーの場合は, [Ubuntu on WSL2](00_Prep.md#wslの初期化) のトップ フォルダーからでもいいですよ.  
 
 ```sh
 cd Documents
@@ -133,7 +114,7 @@ cd learning_js
 `pwd` コマンドを使用して, 正しい場所にいることを確認します
 
 ```sh
-❯ pwd
+$ pwd
 /Users/YourUserName/Documents/learning_js
 ```
 
@@ -188,7 +169,7 @@ git status
 ```
 
 ```sh
-On branch master
+On branch main
 No commits yet
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
@@ -212,7 +193,7 @@ git status
 ```
 
 ```sh
-On branch master
+On branch main
 No commits yet
 Changes to be committed:
   (use "git rm --cached <file>..." to unstage)
@@ -226,7 +207,7 @@ Changes to be committed:
   - [Git - git-commit Documentation](https://git-scm.com/docs/git-commit)
 
 README.mdがリポジトリに追加されました!!
-  - `README.md` が `master` ブランチに追加されたことが分かります
+  - `README.md` が `main` ブランチに追加されたことが分かります
 
 ```sh
 git commit -m "README file created"
@@ -236,12 +217,12 @@ git status
 
 ```sh
 $ git commit -m "README file created"
-[master (root-commit) 03098e7] README file created
+[main (root-commit) 03098e7] README file created
  1 file changed, 3 insertions(+)
  create mode 100644 README.md
 
 $ git status
-On branch master
+On branch main
 nothing to commit, working tree clean
 ```
 
@@ -252,7 +233,7 @@ nothing to commit, working tree clean
 
 `learning_js` という名前のリポジトリを作成します
 
-READMEでリポジトリを初期化しないでください
+「Initialize this repositiory with a README.md」のチェックボックスは、選択を外してください
 
 ![Gif_GitHub_Repo_Demo](assets/Gif_GitHub_Repo_Demo.gif)
 
@@ -268,7 +249,7 @@ GitHub の `Clone or download` ボタンをクリックし, HTTPS リンクを�
 
 ```sh
 git remote add origin https://github.com/Your_GitHub_UserName/learning_js.git
-git push -u origin master
+git push -u origin main
 ```
 
 端末からの結果
@@ -283,8 +264,8 @@ Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
 remote: This repository moved. Please use the new location:
 remote:   https://github.com/ahandsel/learning_js.git
 To https://github.com/ahandsel/learning_js.git
- * [new branch]      master -> master
-Branch 'master' set up to track remote branch 'master' from 'origin'.
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
 ```
 
 #### デバッグ
@@ -304,7 +285,7 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
 
    ```sh
    git remote add origin https://github.com/Your_GitHub_UserName/learning_js.git
-   git push -u origin master
+   git push -u origin main
    ```
 
 4. Github.com のリポジトリをチェックして, プッシュが機能したことを確認します。
@@ -351,7 +332,7 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
 |       |        ↘️  `git push` 🔄 ↘️         |
 |       | [ remote repository (GitHub) 🌐 ] |
 
----
+#### working directory, `git add`, staging area
 
 |       |                                  |
 | :---: | :------------------------------: |
@@ -374,9 +355,7 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
   - 以前は「インデックス」と呼ばれていました
   - ある特定の変更のみを追加し, まとめてリポジトリに追加する準備を行うことができます
 
----
-
-**待って，ステージングエリアが必要な理由？ 🤔**
+##### 待って，ステージングエリアが必要な理由？ 🤔
   - ファイルをステージングする = コミットのためのファイルを準備する
 
 あなたが音楽を作っていると想像してください 🎶
@@ -391,7 +370,7 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
   - アルバム内の必要なすべての曲を `Staging Area` に保存したら, コミットする時間です
   - `git commit -m` する時, "Love Song" ってアルバムのタイトルをコメント追加してコミットします
 
----
+#### `git commit`, repository, `git push`
 
 |       |                                  |
 | :---: | :------------------------------: |
@@ -413,7 +392,7 @@ Branch 'master' set up to track remote branch 'master' from 'origin'.
   - Git リポジトリは, プロジェクト内の `.git` フォルダで管理されています
   - リポジトリは, プロジェクトの変更を追跡できます。
 
-**Git フォルダーの中身は何ですか? 🤔**
+##### Git フォルダーの中身は何ですか? 🤔
 
 ```sh
 $ pwd
@@ -444,7 +423,7 @@ drwxr-xr-x   7 UserName  staff  224 Jun  9 14:54 objects
 drwxr-xr-x   5 UserName  staff  160 Jun  9 14:56 refs
 ```
 
----
+#### `git push`, remote repository
 
 |       |                                  |
 | :---: | :------------------------------: |
@@ -464,8 +443,6 @@ drwxr-xr-x   5 UserName  staff  160 Jun  9 14:56 refs
 `remote repository` (GitHub) 🌐
   - GitHub のサーバー上のリポジトリであり, コードを他のユーザーが確認できるようにします
 
----
-
 ### リモートリポジトリの操作
 
 `git remote add origin <link>`
@@ -475,12 +452,12 @@ drwxr-xr-x   5 UserName  staff  160 Jun  9 14:56 refs
   - 次のコマンドはどちらも同じ内容を実行します
 
    ```sh
-   $ git push -u https://github.com/ahandsel/demo.git master
+   $ git push -u https://github.com/ahandsel/demo.git main
    ```
 
    ```sh
    $ git remote add ALIAS https://github.com/ahandsel/demo.git 
-   $ git push -u ALIAS master
+   $ git push -u ALIAS main
    ```
 
 `git remote`
@@ -502,8 +479,6 @@ drwxr-xr-x   5 UserName  staff  160 Jun  9 14:56 refs
   - [Git - リモートでの作業](https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E5%9F%BA%E6%9C%AC-%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E3%81%A7%E3%81%AE%E4%BD%9C%E6%A5%AD)
   - [Git - Working with Remotes](https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes)
   - [Git - git-remote Documentation](https://git-scm.com/docs/git-remote)
-
----
 
 ### git push?
 `git push <remote> <branch>` 🔄
